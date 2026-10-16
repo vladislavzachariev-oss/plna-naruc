@@ -54,14 +54,9 @@ h2 em{font-size:1.06em;letter-spacing:-.01em}
   .hero__copy{right:var(--pad);max-width:none;display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
   .hero__act{display:grid;justify-items:end}
   .hero__cta{margin-top:0}
-  .hero__hint{max-width:250px}
 }
 .hero__lead em{color:var(--lime)}
 .hero__cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;pointer-events:auto}
-.hero__hint{display:flex;align-items:center;gap:10px;margin-top:18px;font-size:13px;line-height:1.35;opacity:.9;transition:opacity .6s}
-.hero__hint.is-done{opacity:0}
-.hint__dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 0 rgba(212,239,58,.6);animation:pulse 1.8s infinite}
-@keyframes pulse{70%{box-shadow:0 0 0 12px rgba(212,239,58,0)}100%{box-shadow:0 0 0 0 rgba(212,239,58,0)}}
 
 /* ---------- 2. band ---------- */
 .band{background:var(--pink);color:var(--chalk);overflow:hidden;padding:clamp(14px,2vw,26px) 0;border-block:2px solid var(--ink)}

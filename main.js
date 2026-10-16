@@ -58,7 +58,7 @@ addEventListener('scroll', setNav, { passive: true }); setNav();
    ========================================================= */
 const hero = (() => {
   const { Engine, Bodies, Body, Composite, Events, Query, Constraint, Vertices, Sleeping } = Matter;
-  const sec = $('#hero'), cv = $('#garden'), ctx = cv.getContext('2d'), hint = $('#hint');
+  const sec = $('#hero'), cv = $('#garden'), ctx = cv.getContext('2d');
   const engine = Engine.create({ enableSleeping: true, positionIterations: 8, velocityIterations: 6 });
   const world = engine.world;
   const st = { W: 0, H: 0, dpr: 1, F: 0, letters: [], statics: [], flowers: [], visible: true, ready: false, taps: 0, throws: 0, hopT: 0 };
@@ -230,7 +230,6 @@ const hero = (() => {
     for (const b of live()) { const d = Math.hypot(b.position.x - p.x, b.position.y - p.y) - b.circleRadius; if (d < bd) { bd = d; best = b; } }
     return best;
   }
-  const doneHint = () => { if (st.taps + st.throws >= 2) hint.classList.add('is-done'); };
 
   cv.addEventListener('touchstart', e => { const t = e.touches[0]; if (t && hitFlower(local(t))) e.preventDefault(); }, { passive: false });
   cv.addEventListener('pointerdown', e => {
@@ -260,7 +259,7 @@ const hero = (() => {
       Body.setAngularVelocity(b, b.angularVelocity + ptr.vx * .002);
     }
   });
-  const release = () => { if (drag) { Composite.remove(world, drag); drag = null; sec.classList.remove('is-grab'); st.throws++; doneHint(); } };
+  const release = () => { if (drag) { Composite.remove(world, drag); drag = null; sec.classList.remove('is-grab'); st.throws++; } };
   cv.addEventListener('pointerup', e => {
     const p = local(e);
     const tap = !drag && down && Math.hypot(p.x - down.x, p.y - down.y) < 8 && performance.now() - down.t < 450;
@@ -270,7 +269,7 @@ const hero = (() => {
     const inLetter = Query.point(st.statics, p)[0];
     if (inLetter) y = inLetter.bounds.min.y - baseSize() * .6;
     addFlower(p.x, y, { pop: true, vy: -rand(5, 10), vx: rand(-3, 3) });
-    st.taps++; doneHint();
+    st.taps++;
   });
   cv.addEventListener('pointercancel', () => { release(); down = null; });
   cv.addEventListener('pointerleave', () => sec.classList.remove('is-over'));
